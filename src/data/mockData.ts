@@ -1,139 +1,300 @@
-import { LanguageInfo, UserRoleInfo, HealthcareSymptomCard, AgricultureAdvisory, GovtSchemeForm, SignLanguageDictionaryItem, SystemAnalytics } from '../types';
+import { LanguageInfo, UserRoleInfo, HealthcareSymptomCard, AgricultureAdvisory, GovtSchemeForm, SignLanguageDictionaryItem, SystemAnalytics, UserAccount } from '../types';
 
 export const SUPPORTED_LANGUAGES: LanguageInfo[] = [
-  { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी', script: 'Devanagari', region: 'North/Central India', speakers: '600M+', lowResource: false, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'mr', name: 'Marathi', nativeName: 'मराठी', script: 'Devanagari', region: 'Maharashtra', speakers: '90M+', lowResource: false, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'gu', name: 'Gujarati', nativeName: 'ગુજરાતી', script: 'Gujarati', region: 'Gujarat', speakers: '60M+', lowResource: false, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'bn', name: 'Bengali', nativeName: 'বাংলা', script: 'Bengali', region: 'West Bengal, Tripura', speakers: '100M+', lowResource: false, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'pa', name: 'Punjabi', nativeName: 'ਪੰਜਾਬੀ', script: 'Gurmukhi', region: 'Punjab', speakers: '35M+', lowResource: false, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'kn', name: 'Kannada', nativeName: 'ಕನ್ನಡ', script: 'Kannada', region: 'Karnataka', speakers: '50M+', lowResource: false, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'ta', name: 'Tamil', nativeName: 'தமிழ்', script: 'Tamil', region: 'Tamil Nadu, Puducherry', speakers: '75M+', lowResource: false, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'te', name: 'Telugu', nativeName: 'తెలుగు', script: 'Telugu', region: 'Andhra Pradesh, Telangana', speakers: '85M+', lowResource: false, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'ml', name: 'Malayalam', nativeName: 'മലയാളം', script: 'Malayalam', region: 'Kerala', speakers: '38M+', lowResource: false, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'or', name: 'Odia', nativeName: 'ଓଡ଼ିଆ', script: 'Odia', region: 'Odisha', speakers: '35M+', lowResource: false, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'as', name: 'Assamese', nativeName: 'অসমীয়া', script: 'Bengali-Assamese', region: 'Assam', speakers: '15M+', lowResource: true, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'ur', name: 'Urdu', nativeName: 'اردو', script: 'Perso-Arabic', region: 'Pan-India', speakers: '50M+', lowResource: false, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'sa', name: 'Sanskrit', nativeName: 'संस्कृतम्', script: 'Devanagari', region: 'Pan-India', speakers: 'Classical', lowResource: true, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'kok', name: 'Konkani', nativeName: 'कोंकणी', script: 'Devanagari / Roman', region: 'Goa, Karnataka', speakers: '2.5M+', lowResource: true, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'ne', name: 'Nepali', nativeName: 'नेपाली', script: 'Devanagari', region: 'Sikkim, West Bengal', speakers: '3M+', lowResource: true, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'mni', name: 'Manipuri (Meitei)', nativeName: 'ꯃꯩꯇꯩꯂꯣꯟ', script: 'Meitei Mayek / Bengali', region: 'Manipur', speakers: '1.8M+', lowResource: true, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'brx', name: 'Bodo', nativeName: 'बड़ो', script: 'Devanagari', region: 'Bodoland Assam', speakers: '1.5M+', lowResource: true, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'sat', name: 'Santali', nativeName: 'ᱥᱟᱱᱛᱟᱲᱤ', script: 'Ol Chiki', region: 'Jharkhand, Odisha, WB', speakers: '7M+', lowResource: true, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'ks', name: 'Kashmiri', nativeName: 'کٲشُر', script: 'Perso-Arabic / Devanagari', region: 'Jammu & Kashmir', speakers: '7M+', lowResource: true, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'doi', name: 'Dogri', nativeName: 'डोगरी', script: 'Devanagari', region: 'Jammu', speakers: '2.6M+', lowResource: true, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'mai', name: 'Maithili', nativeName: 'मैथिली', script: 'Tirhuta / Devanagari', region: 'Bihar, Nepal border', speakers: '14M+', lowResource: true, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'sd', name: 'Sindhi', nativeName: 'سنڌي', script: 'Arabic / Devanagari', region: 'Gujarat, Maharashtra', speakers: '2.8M+', lowResource: true, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } },
-  { code: 'en', name: 'English', nativeName: 'English', script: 'Latin', region: 'Global / India', speakers: '125M+ in India', lowResource: false, supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } }
+  { 
+    code: 'en', 
+    name: 'English', 
+    nativeName: 'English', 
+    script: 'Latin', 
+    region: 'India & Global', 
+    speakers: '125M+ in India', 
+    lowResource: false, 
+    supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } 
+  },
+  { 
+    code: 'hi', 
+    name: 'Hindi', 
+    nativeName: 'हिन्दी', 
+    script: 'Devanagari', 
+    region: 'North & Central India', 
+    speakers: '600M+', 
+    lowResource: false, 
+    supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } 
+  },
+  { 
+    code: 'mr', 
+    name: 'Marathi', 
+    nativeName: 'मराठी', 
+    script: 'Devanagari', 
+    region: 'Maharashtra & Goa', 
+    speakers: '90M+', 
+    lowResource: false, 
+    supportedFeatures: { asr: true, nmt: true, tts: true, ocr: true, nlp: true } 
+  }
+];
+
+export const DEMO_USERS: UserAccount[] = [
+  {
+    id: 'user-1',
+    name: 'Aniket Kulkarni / अनिकेत कुलकर्णी',
+    email: 'aniket.student@vidya.edu.in',
+    phone: '+91 98234 56789',
+    role: 'student',
+    preferredLanguage: 'mr',
+    avatar: '🎓',
+    createdAt: '2026-01-15',
+    isLoggedIn: true
+  },
+  {
+    id: 'user-2',
+    name: 'Ramesh Patil / रमेश पाटील',
+    email: 'ramesh.patil@agrikisan.in',
+    phone: '+91 94220 11223',
+    role: 'farmer',
+    preferredLanguage: 'mr',
+    avatar: '👨‍🌾',
+    createdAt: '2026-03-01',
+    isLoggedIn: false
+  },
+  {
+    id: 'user-3',
+    name: 'Pooja Sharma / पूजा शर्मा',
+    email: 'pooja.sharma@health.gov.in',
+    phone: '+91 98765 43210',
+    role: 'healthcare_worker',
+    preferredLanguage: 'hi',
+    avatar: '👩‍⚕️',
+    createdAt: '2026-02-10',
+    isLoggedIn: false
+  },
+  {
+    id: 'user-4',
+    name: 'Aarav Deshmukh / आरव देशमुख',
+    email: 'aarav.deshmukh@bharatvoice.ai',
+    phone: '+91 98234 11223',
+    role: 'citizen',
+    preferredLanguage: 'mr',
+    avatar: '👨‍💼',
+    createdAt: '2026-01-10',
+    isLoggedIn: false
+  },
+  {
+    id: 'user-5',
+    name: 'Dr. Vikram Joshi / डॉ. विक्रम जोशी',
+    email: 'vikram.joshi@admin.ai',
+    phone: '+91 91234 56780',
+    role: 'admin',
+    preferredLanguage: 'en',
+    avatar: '🛡️',
+    createdAt: '2025-11-20',
+    isLoggedIn: false
+  }
 ];
 
 export const USER_ROLES: UserRoleInfo[] = [
-  { id: 'citizen', label: 'Citizen', icon: 'User', description: 'Voice translation, form filling assistance & public notifications', recommendedModule: 'voice_translator' },
-  { id: 'student', label: 'Student', icon: 'GraduationCap', description: 'Language learning, flashcards, AI tutor & lecture translation', recommendedModule: 'education' },
-  { id: 'teacher', label: 'Teacher', icon: 'BookOpen', description: 'Content translation, lesson voiceover & question generator', recommendedModule: 'education' },
-  { id: 'govt_officer', label: 'Govt Officer', icon: 'Landmark', description: 'Public service translation, official notices & citizen dialogue', recommendedModule: 'governance' },
-  { id: 'healthcare_worker', label: 'Healthcare Worker', icon: 'Stethoscope', description: 'Patient symptom translation, prescription reader & medical forms', recommendedModule: 'healthcare' },
-  { id: 'farmer', label: 'Farmer / Agri', icon: 'Sprout', description: 'Crop disease advice, mandi prices & voice weather forecasts', recommendedModule: 'agriculture' },
-  { id: 'business', label: 'Business Enterprise', icon: 'Building2', description: 'Multilingual customer support chatbots & document workflow', recommendedModule: 'text_translator' },
-  { id: 'admin', label: 'System Admin', icon: 'ShieldCheck', description: 'Model benchmarking, RBAC security, API usage & telemetry', recommendedModule: 'admin_analytics' }
+  { id: 'citizen', label: 'Citizen (नागरिक)', icon: 'User', description: 'Voice translation, form filling assistance & public notifications', recommendedModule: 'text_translator' },
+  { id: 'student', label: 'Student (विद्यार्थी)', icon: 'GraduationCap', description: 'Language learning, AI conversational tutor & practice', recommendedModule: 'ai_chat' },
+  { id: 'teacher', label: 'Teacher (शिक्षक)', icon: 'BookOpen', description: 'Content translation, lesson voiceover & question generator', recommendedModule: 'text_translator' },
+  { id: 'govt_officer', label: 'Govt Officer (अधिकारी)', icon: 'Landmark', description: 'Public service translation, official notices & citizen dialogue', recommendedModule: 'governance' },
+  { id: 'healthcare_worker', label: 'Healthcare Worker (आरोग्य सेवक)', icon: 'Stethoscope', description: 'Patient symptom translation, prescription reader & medical forms', recommendedModule: 'healthcare' },
+  { id: 'farmer', label: 'Farmer / Agri (शेतकरी / किसान)', icon: 'Sprout', description: 'Crop disease advice, mandi prices & voice weather forecasts', recommendedModule: 'agriculture' },
+  { id: 'business', label: 'Business Enterprise (उद्योग)', icon: 'Building2', description: 'Multilingual customer support chatbots & document workflow', recommendedModule: 'text_translator' },
+  { id: 'admin', label: 'System Admin (प्रशासक)', icon: 'ShieldCheck', description: 'Model benchmarking, RBAC security, API usage & telemetry', recommendedModule: 'admin_analytics' }
 ];
 
 export const SAMPLE_TRANSLATIONS: Record<string, { native: string; english: string; transliteration: string }> = {
-  hi: { native: 'भारतवाणी एआई में आपका स्वागत है। आप अपनी मातृभाषा में निर्बाध संवाद कर सकते हैं।', english: 'Welcome to BharatVoice AI. You can communicate seamlessly in your mother tongue.', transliteration: 'BharatVoice AI mein aapka swagat hai. Aap apni matribhasha mein nirbaadh samvaad kar sakte hain.' },
-  mr: { native: 'भारतवाणी एआय मध्ये आपले स्वागत आहे. आपण आपल्या मातृभाषेत सहज संवाद साधू शकता.', english: 'Welcome to BharatVoice AI. You can communicate seamlessly in your mother tongue.', transliteration: 'BharatVoice AI madhye aaple swagat aahe. Aapana aaplyaa maatrubhaashet sahaj samvaad saadhu shakataa.' },
-  ta: { native: 'பாரத்வாஸ் AI க்கு உங்களை வரவேற்கிறோம். உங்கள் தாய்மொழியில் தடையின்றி உரையாடலாம்.', english: 'Welcome to BharatVoice AI. You can communicate seamlessly in your mother tongue.', transliteration: 'BharatVoice AI kku ungalai varaverkirom. Ungal thaaimozhiyil thadaiyindri uraiyaadalaam.' },
-  te: { native: 'భారత్‌వాస్ AI కి స్వాగతం. మీరు మీ మాతృభాషలో సులభంగా మాట్లాడవచ్చు.', english: 'Welcome to BharatVoice AI. You can communicate seamlessly in your mother tongue.', transliteration: 'BharatVoice AI ki swagatam. Meeru mee maatrubhashalo sulabhanga maatlaadavachhu.' },
-  bn: { native: 'ভারতবাণী এআই-তে আপনাকে স্বাগতম। আপনি আপনার মাতৃভাষায় নিরবচ্ছিন্নভাবে কথা বলতে পারেন।', english: 'Welcome to BharatVoice AI. You can communicate seamlessly in your mother tongue.', transliteration: 'BharatVoice AI-te aapnake swagatam. Aapni aapnar matribhashay nirabachhinnobhabe kotha bolte paren.' },
-  kn: { native: 'ಭಾರತವಾಣಿ AI ಗೆ ನಿಮಗೆ ಸುಸ್ವಾಗತ. உங்கள் ಮಾತೃಭಾಷೆಯಲ್ಲಿ ನೀವು ಮುಕ್ತವಾಗಿ ಮಾತನಾಡಬಹುದು.', english: 'Welcome to BharatVoice AI. You can communicate seamlessly in your mother tongue.', transliteration: 'BharatVoice AI ge nimage suswagata. Nimma maatrubhaasheyalli neevu muktavaagi maatanaadabahudu.' },
-  gu: { native: 'ભારતવાણી AI માં આપનું સ્વાગત છે. તમે તમારી માતૃભાષામાં સરળતાથી વાતચીત કરી શકો છો.', english: 'Welcome to BharatVoice AI. You can communicate seamlessly in your mother tongue.', transliteration: 'BharatVoice AI ma aapnu swagat chhe. Tame tamari matrubhashama saraltathi vatchit kari shako chho.' },
-  sat: { native: 'ᱵᱷᱟᱨᱚᱛᱵᱷᱚᱭᱮᱥ ᱮᱟᱟᱭ ᱨᱮ ᱟᱯᱱᱟᱨᱟᱜ ᱥᱟᱹᱜᱩᱱ ᱫᱟᱨᱟᱢ᱾, ᱟᱯᱮ ᱟᱯᱱᱟᱨᱟᱜ ᱟᱭᱳ ᱟᱲᱟᱝ ᱛᱮ ᱨᱚᱲ ᱫᱟᱲᱮᱭᱟᱜ-ᱟᱯᱮ᱾', english: 'Welcome to BharatVoice AI. You can communicate seamlessly in your mother tongue.', transliteration: 'BharatVoice AI re apnarag sagun daram. Ape apnarag ayo alang te ror dareyag-ape.' }
+  en: {
+    native: 'Welcome to BharatVoice AI. You can communicate seamlessly in English, Hindi, and Marathi.',
+    english: 'Welcome to BharatVoice AI. You can communicate seamlessly in English, Hindi, and Marathi.',
+    transliteration: 'Welcome to BharatVoice AI. You can communicate seamlessly in English, Hindi, and Marathi.'
+  },
+  hi: { 
+    native: 'भारतवाणी एआई में आपका स्वागत है। आप हिंदी, मराठी और अंग्रेजी में निर्बाध संवाद कर सकते हैं।', 
+    english: 'Welcome to BharatVoice AI. You can communicate seamlessly in your mother tongue.', 
+    transliteration: 'BharatVoice AI mein aapka swagat hai. Aap Hindi, Marathi aur Angrezi mein nirbaadh samvaad kar sakte hain.' 
+  },
+  mr: { 
+    native: 'भारतवाणी एआय मध्ये आपले सहर्ष स्वागत आहे. आपण मराठी, हिंदी आणि इंग्रजीत सहज संवाद साधू शकता.', 
+    english: 'Welcome to BharatVoice AI. You can communicate seamlessly in your mother tongue.', 
+    transliteration: 'BharatVoice AI madhye aaple saharsha swagat aahe. Aapana Marathi, Hindi aani Ingrajit sahaj samvaad saadhu shakataa.' 
+  }
 };
 
 export const MOCK_HEALTHCARE_DATA: HealthcareSymptomCard[] = [
   {
     id: 'hc-101',
-    chiefComplaint: 'तीव्र छाती में दर्द और सांस लेने में कठिनाई (Acute Chest Pain & Dyspnea)',
-    symptoms: ['Chest pressure', 'Shortness of breath', 'Sweating', 'Dizziness'],
+    patientName: 'Rameshwar Shinde / रामेश्वर शिंदे',
+    patientAge: '54 Yrs',
+    patientGender: 'Male',
+    chiefComplaint: 'तीव्र छातीत दुखणे आणि श्वास घेण्यास त्रास (Acute Chest Pain & Dyspnea)',
+    symptoms: ['Chest tightness / छातीत दाब', 'Shortness of breath / श्वास लागणे', 'Excessive Sweating / घाम येणे', 'Dizziness / चक्कर'],
+    duration: '2 Hours (Acute)',
     translatedMedicalSummary: {
-      hi: 'मरीज को पिछले 2 घंटे से छाती में तेज जकड़न और सांस फूलने की शिकायत है। तुरंत ईसीजी और कार्डिएक परामर्श आवश्यक है।',
-      ta: 'நோயாளிக்கு கடந்த 2 மணிநேரமாக நெஞ்சு இறுக்கமும் மூச்சுத்திணறலும் உள்ளது. உடனடியாக ஈசிஜி பார்க்கப்பட வேண்டும்.',
-      mr: 'रुग्णाला गेल्या २ तासांपासून छातीत तीव्र वेदना आणि श्वास घेण्यास त्रास होत आहे. तातडीने ईसीजी तपासणी आवश्यक आहे.',
-      te: 'రోగి గత 2 గంటలుగా ఛాతీ నొప్పితో బాధపడుతున్నారు. తక్షణమే ఈసిజీ పరీక్ష అవసరం.'
+      en: 'Patient presents with severe acute retrosternal chest pain, radiating discomfort, and severe dyspnea for 2 hours. Immediate 12-lead ECG, troponin I, and cardiac ICU admission recommended.',
+      hi: 'मरीज को पिछले 2 घंटे से छाती में तेज जकड़न और सांस फूलने की शिकायत है। तुरंत 12-लीड ईसीजी और आपातकालीन कार्डिएक परामर्श आवश्यक है।',
+      mr: 'रुग्णाला गेल्या २ तासांपासून छातीत तीव्र वेदना आणि श्वास घेण्यास त्रास होत आहे. तातडीने १२-लीड ईसीजी तपासणी आणि अतिदक्षता उपचार आवश्यक आहेत.'
     },
     urgencyLevel: 'Emergency',
-    triageNotes: 'Prioritize Triage Category 1. Monitor O2 saturation and prepare emergency cart.'
+    riskLevel: 'High',
+    riskScore: 94,
+    confidenceScore: 96.2,
+    suggestedAction: 'Immediate clinician review & Emergency Cardiac ICU admission',
+    responsePriority: 'Immediate (< 5 mins)',
+    vitalSigns: {
+      bp: '160/100 mmHg',
+      heartRate: '112 bpm',
+      spo2: '91%',
+      temp: '98.6°F'
+    },
+    triageNotes: 'Prioritize Triage Category 1. Maintain O2 saturation > 95%. Prepare emergency defibrillator and sublingual nitroglycerin if indicated.',
+    consentId: 'MED-CONSENT-991204',
+    consentTimestamp: '2026-08-30 11:10:45 IST',
+    emergencyAlertTriggered: true
   },
   {
     id: 'hc-102',
-    chiefComplaint: 'तीव्र ताप आणि खोकला (High Fever & Persistent Cough)',
-    symptoms: ['Fever > 102°F', 'Dry cough', 'Body ache', 'Fatigue'],
+    patientName: 'Kavita Suresh Patil / कविता सुरेश पाटील',
+    patientAge: '32 Yrs',
+    patientGender: 'Female',
+    chiefComplaint: 'तीव्र ताप आणि कोरडा खोकला (High Grade Fever with Persistent Cough)',
+    symptoms: ['High Fever > 102°F / ताप', 'Continuous dry cough / खोकला', 'Severe body pain / अंगदुखी', 'Fatigue / थकवा'],
+    duration: '3 Days',
     translatedMedicalSummary: {
-      hi: '3 दिनों से तेज बुखार और लगातार खांसी। रक्त जांच (CBC) और मलेरिया/डेंगू एंटीजन टेस्ट की सलाह दी जाती है।',
-      mr: '३ दिवसांपासून तीव्र ताप आणि कोरडा खोकला. सीबीसी आणि डेंग्यू तपासणीची शिफारस.'
+      en: 'Patient has high-grade fever (>102°F) with dry cough for 3 days. Complete Blood Count (CBC), Dengue NS1 antigen, and Malaria smear recommended.',
+      hi: '3 दिनों से तेज बुखार (>102°F) और लगातार सूखी खांसी। पूर्ण रक्त गणना (CBC) और मलेरिया/डेंगू एंटीजन परीक्षण कराने की सलाह है।',
+      mr: 'गेल्या ३ दिवसांपासून तीव्र ताप (>१०२°F) आणि कोरडा खोकला. सीबीसी (CBC) आणि डेंग्यू/मलेरिया चाचणी करून घेण्याचा वैद्यकीय सल्ला दिला आहे.'
     },
     urgencyLevel: 'Urgent',
-    triageNotes: 'Administer Antipyretic, recommend viral panel and hydration.'
+    riskLevel: 'Moderate',
+    riskScore: 68,
+    confidenceScore: 93.8,
+    suggestedAction: 'Chest X-ray, CBC blood smear & Antipyretic hydration therapy',
+    responsePriority: 'Urgent (< 30 mins)',
+    vitalSigns: {
+      bp: '120/80 mmHg',
+      heartRate: '88 bpm',
+      spo2: '97%',
+      temp: '102.4°F'
+    },
+    triageNotes: 'Administer Paracetamol 650mg SOS. Advise oral hydration therapy and isolate pending viral panel results.',
+    consentId: 'MED-CONSENT-991205',
+    consentTimestamp: '2026-08-30 11:08:12 IST',
+    emergencyAlertTriggered: false
+  },
+  {
+    id: 'hc-103',
+    patientName: 'Ganesh Shripad Deshmukh / गणेश श्रीपाद देशमुख',
+    patientAge: '28 Yrs',
+    patientGender: 'Male',
+    chiefComplaint: 'पोटात तीव्र कळा आणि मळमळ (Severe Abdominal Cramps & Nausea)',
+    symptoms: ['Abdominal pain / पोटदुखी', 'Nausea / मळमळ', 'Dehydration / निर्जलीकरण'],
+    duration: '1 Day',
+    translatedMedicalSummary: {
+      en: 'Acute gastroenteritis symptoms with severe cramping. Advise electrolyte replacement and abdominal ultrasound if localized right lower quadrant pain persists.',
+      hi: 'तीव्र पेट दर्द और उल्टी के लक्षण। ओआरएस (ORS) घोल और पेट का अल्ट्रासाउंड कराने का परामर्श दिया गया।',
+      mr: 'पोटात तीव्र कळा आणि उलट्यांचा त्रास. ओआरएस (ORS) द्रावण आणि पोटाची सोनोग्राफी (Ultrasound) तपासणी त्वरित करून घ्या.'
+    },
+    urgencyLevel: 'Normal',
+    riskLevel: 'Low',
+    riskScore: 32,
+    confidenceScore: 91.5,
+    suggestedAction: 'Oral rehydration salts, anti-spasmodics & routine outpatient follow-up',
+    responsePriority: 'Routine (< 2 hours)',
+    vitalSigns: {
+      bp: '118/76 mmHg',
+      heartRate: '74 bpm',
+      spo2: '99%',
+      temp: '98.4°F'
+    },
+    triageNotes: 'Oral rehydration salts, anti-spasmodic therapy, diet of bland foods.',
+    consentId: 'MED-CONSENT-991206',
+    consentTimestamp: '2026-08-30 11:02:30 IST',
+    emergencyAlertTriggered: false
   }
 ];
 
 export const MOCK_AGRICULTURE_DATA: AgricultureAdvisory[] = [
   {
     id: 'ag-501',
-    crop: 'धान (Paddy Rice)',
-    query: 'पत्तियों पर भूरे धब्बे दिखाई दे रहे हैं, फसल सूख रही है। (Brown spots on leaf blades)',
-    detectedIssue: 'Rice Brown Spot Disease (Helminthosporium oryzae)',
-    remedyNative: 'फसल पर ट्राइसाइक्लाजोल 75% डब्लूपी (Tricyclazole) 0.6 ग्राम प्रति लीटर पानी में मिलाकर छिड़काव करें। खेत में अत्यधिक नाइट्रोजन न डालें।',
-    remedyEnglish: 'Spray Tricyclazole 75% WP @ 0.6g/L of water. Avoid excessive nitrogen application.',
-    marketPrice: '₹2,200 - ₹2,450 / Quintal (Mandi Rate)',
-    weatherWarning: 'अगले 48 घंटों में मध्यम वर्षा की संभावना। छिड़काव के बाद 4 घंटे तक बारिश नहीं होनी चाहिए।'
+    crop: 'कापूस / कपास (Cotton)',
+    query: 'बोंडअळीचा प्रादुर्भाव आणि पाने पिवळी पडत आहेत. (Pink Bollworm & leaf yellowing)',
+    detectedIssue: 'Pink Bollworm (गुलाबी बोंडअळी / Pectinophora gossypiella)',
+    remedyNative: 'एकर प्रति ५ फेरोमोन ट्रॅप लावा आणि प्रादुर्भाव वाढल्यास इमामेक्टिन बेंझोएट ५% एसजी (४ ग्रॅम प्रति १० लिटर पाणी) फवारा. नत्राचा संतुलित वापर करा.',
+    remedyEnglish: 'Install 5 Pheromone Traps per acre. Spray Emamectin Benzoate 5% SG @ 4g per 10L water. Maintain balanced nitrogen application.',
+    marketPrice: '₹7,250 - ₹7,600 / क्विंटल (Mandi Rate)',
+    weatherWarning: 'पुढील २४ तासांत अंशतः ढगाळ हवामान. फवारणी सकाळी ८ ते ११ या वेळेतच करावी.'
   },
   {
     id: 'ag-502',
-    crop: 'कपास (Cotton)',
-    query: 'गुलाबी सुंडी का प्रकोप और पत्तियां पीली पड़ रही हैं। (Pink Bollworm & leaf yellowing)',
-    detectedIssue: 'Pink Bollworm (Pectinophora gossypiella)',
-    remedyNative: 'फेरोमोन ट्रैप 5 प्रति एकड़ लगाएं और एमामेक्टिन बेंजोएट 5% एसजी का प्रयोग करें।',
-    remedyEnglish: 'Install 5 Pheromone Traps per acre and spray Emamectin Benzoate 5% SG.',
-    marketPrice: '₹7,100 / Quintal',
-    weatherWarning: 'हवा की गति 14 किमी/घंटे, कीटनाशक छिड़काव सुबह 8 से 10 बजे के बीच करें।'
+    crop: 'भात / धान (Paddy Rice)',
+    query: 'पानांवर तपकिरी ठिपके दिसत असून पीक सुकत आहे. (Brown spots on leaf blades)',
+    detectedIssue: 'Rice Brown Spot Disease (तपकिरी ठिपके रोग)',
+    remedyNative: 'पिकावर ट्रायसायक्लाझोल ७५% डब्ल्यूपी (Tricyclazole) ०.६ ग्रॅम प्रति लिटर पाण्यात मिसळून फवारणी करा. युरियाचा अतिरेक टाळा.',
+    remedyEnglish: 'Spray Tricyclazole 75% WP @ 0.6g/L of water. Avoid excessive top dressing of urea fertilizer.',
+    marketPrice: '₹2,280 - ₹2,480 / क्विंटल',
+    weatherWarning: 'संध्याकाळी हलक्या पावसाची शक्यता. फवारणीनंतर किमान ४ तास पाऊस नसावा.'
+  },
+  {
+    id: 'ag-503',
+    crop: 'कांदा / प्याज (Onion)',
+    query: 'पानांवर जांभळा करपा आणि शेंडे जळणे. (Purple Blotch & Tip burn)',
+    detectedIssue: 'Purple Blotch Disease (जांभळा करपा)',
+    remedyNative: 'मॅन्कोझेब ७५% डब्ल्यूपी २.५ ग्रॅम किंवा टेबुकोनॅझोल १ मिली प्रति लिटर पाण्यात मिसळून सोबत स्टिकरचा वापर करा.',
+    remedyEnglish: 'Spray Mancozeb 75% WP @ 2.5g/L or Tebuconazole @ 1ml/L with a wetting agent / sticker.',
+    marketPrice: '₹2,800 - ₹3,400 / क्विंटल (लासलगाव / नाशिक कृषी उत्पन्न बाजार)',
+    weatherWarning: 'सकाळी धुके पडण्याची शक्यता असल्याने बुरशीनाशक फवारणी त्वरित करा.'
   }
 ];
 
 export const MOCK_GOVT_FORMS: GovtSchemeForm[] = [
   {
-    id: 'gov-pmkisan',
-    schemeName: 'पीएम-किसान सम्मान निधि योजना (PM-KISAN Samman Nidhi)',
-    ministry: 'कृषि एवं किसान कल्याण मंत्रालय (Ministry of Agriculture)',
-    applicantVoicePrompt: 'कृपया अपना आधार नंबर, खसरा खतौनी नंबर और बैंक खाता विवरण बोलें।',
+    id: 'gov-ladki-bahin',
+    schemeName: 'मुख्यमंत्री माझी लाडकी बहीण योजना (Mukhyamantri Majhi Ladki Bahin)',
+    ministry: 'महिला व बाल विकास विभाग, महाराष्ट्र शासन (Govt. of Maharashtra)',
+    applicantVoicePrompt: 'कृपया आपले आधार कार्ड नाव, बँक खाते आणि कौटुंबिक उत्पन्नाचा दाखला सांगा.',
     fields: [
-      { fieldId: 'farmer_name', labelNative: 'किसान का पूरा नाम', labelEnglish: 'Farmer Full Name', value: 'रमेश कुमार शर्मा (Ramesh Kumar Sharma)', required: true },
-      { fieldId: 'aadhaar_no', labelNative: 'आधार कार्ड संख्या', labelEnglish: 'Aadhaar Card Number', value: '9823-4512-8809', required: true },
-      { fieldId: 'land_khata', labelNative: 'खसरा खतौनी / खाता संख्या', labelEnglish: 'Land Khasra / Khata Number', value: 'Khata No. 412/A, Mouza Rampur', required: true },
-      { fieldId: 'bank_ifsc', labelNative: 'बैंक आईएफएससी कोड', labelEnglish: 'Bank IFSC Code', value: 'SBIN0001420', required: true }
+      { fieldId: 'beneficiary_name', labelNative: 'अर्जदार महिलेचे पूर्ण नाव', labelEnglish: 'Beneficiary Full Name', value: 'सुनिता गणेश पाटील (Sunita Ganesh Patil)', required: true },
+      { fieldId: 'aadhaar_no', labelNative: 'आधार कार्ड क्रमांक', labelEnglish: 'Aadhaar Card Number', value: '7482-9012-3341', required: true },
+      { fieldId: 'bank_account', labelNative: 'आधार लिंक बँक खाते क्रमांक', labelEnglish: 'Aadhaar Linked Bank Account', value: '401288920194 (Bank of Maharashtra)', required: true },
+      { fieldId: 'family_income', labelNative: 'वार्षिक कौटुंबिक उत्पन्न (₹)', labelEnglish: 'Annual Family Income (INR)', value: '₹1,20,000 (दाखला जोडला)', required: true }
     ],
-    generatedNoticeText: 'आवेदक रमेश कुमार शर्मा का पीएम-किसान पंजीकरण सफलतापूर्वक सत्यापित किया गया। वार्षिक ₹6,000 की किश्तें आपके डीबीटी (DBT) बैंक खाते में हस्तांतरित की जाएंगी।'
+    generatedNoticeText: 'अर्जदार सुनिता पाटील यांचा माझी लाडकी बहीण योजनेचा अर्ज यशस्वीरित्या मंजूर झाला आहे. दरमहा ₹१,५०० ची आर्थिक मदत आपल्या थेट बँक खात्यात (DBT) जमा केली जाईल.'
+  },
+  {
+    id: 'gov-pmkisan',
+    schemeName: 'पीएम-किसान सन्मान निधी योजना (PM-KISAN Samman Nidhi)',
+    ministry: 'कृषि एवं किसान कल्याण मंत्रालय (Ministry of Agriculture)',
+    applicantVoicePrompt: 'कृपया अपना आधार नंबर, खसरा / ७/१२ उतारा नंबर और बैंक विवरण बोलें।',
+    fields: [
+      { fieldId: 'farmer_name', labelNative: 'किसान का पूरा नाम / शेतकऱ्याचे नाव', labelEnglish: 'Farmer Full Name', value: 'रमेश कुमार शर्मा (Ramesh Kumar Sharma)', required: true },
+      { fieldId: 'aadhaar_no', labelNative: 'आधार कार्ड संख्या', labelEnglish: 'Aadhaar Card Number', value: '9823-4512-8809', required: true },
+      { fieldId: 'land_khata', labelNative: '७/१२ उतारा / खसरा नंबर', labelEnglish: 'Land 7/12 / Khata Number', value: 'Gat No. 142/A, Mouza Rampur', required: true },
+      { fieldId: 'bank_ifsc', labelNative: 'बैंक आईएफएससी कोड', labelEnglish: 'Bank IFSC Code', value: 'SBIN0001420 (SBI)', required: true }
+    ],
+    generatedNoticeText: 'आवेदक रमेश कुमार शर्मा का पीएम-किसान पंजीकरण सफलतापूर्वक सत्यापित हुआ। वार्षिक ₹6,000 की वित्तीय सहायता DBT माध्यम से सीधे खाते में भेजी जाएगी।'
   }
 ];
 
 export const MOCK_SIGN_LANGUAGE_ITEMS: SignLanguageDictionaryItem[] = [
   {
-    phrase: 'नमस्कार / नम्र निवेदन (Greetings & Respect)',
-    language: 'hi',
+    phrase: 'नमस्कार / स्वागत आहे (Greetings / Welcome)',
+    language: 'mr',
     signNotation: 'ISL-GREETING-PALMS-JOINED',
-    handGestures: ['Both hands at chest level', 'Palms pressed together', 'Slight head bow'],
+    handGestures: ['Both hands pressed together at chest level (Namaste gesture)', 'Gentle nod of head', 'Friendly facial expression'],
     animationFrames: ['🙏', '🤝', '😊']
   },
   {
-    phrase: 'सहायता चाहिए (Need Medical Assistance)',
+    phrase: 'मदत पाहिजे / सहायता चाहिए (Need Assistance)',
     language: 'hi',
     signNotation: 'ISL-HELP-MEDICAL-CROSS',
-    handGestures: ['Right hand tapping left wrist pulse', 'Open palm wave upward'],
+    handGestures: ['Right palm taps left wrist pulse point', 'Right hand extends forward with open palm asking for support'],
     animationFrames: ['🖐️', '➕', '🚨']
   },
   {
-    phrase: 'धन्यवाद (Thank You)',
-    language: 'ta',
+    phrase: 'धन्यवाद / Thank You (Gratitude)',
+    language: 'en',
     signNotation: 'ISL-THANKS-CHIN-TOUCH',
-    handGestures: ['Fingertips touch chin', 'Extend hand forward towards speaker'],
+    handGestures: ['Fingertips gently touch chin', 'Hand moves outward smoothly towards listener with smile'],
     animationFrames: ['🖐️', '➡️', '🙏']
   }
 ];
@@ -142,15 +303,15 @@ export const INITIAL_ANALYTICS: SystemAnalytics = {
   totalTranslations: 1482930,
   activeUsersToday: 42180,
   avgLatencyMs: 142,
-  bleuScoreAverage: 41.8,
-  asrAccuracyRate: 94.6,
+  bleuScoreAverage: 42.6,
+  asrAccuracyRate: 96.2,
   topLanguagePairs: [
-    { pair: 'Hindi ➔ English', count: 482100 },
-    { pair: 'English ➔ Marathi', count: 294100 },
-    { pair: 'Tamil ➔ English', count: 215000 },
-    { pair: 'Bengali ➔ Hindi', count: 184900 },
-    { pair: 'Telugu ➔ English', count: 154000 },
-    { pair: 'Santali ➔ Hindi (Low-Res)', count: 68400 }
+    { pair: 'Marathi ➔ English', count: 520400 },
+    { pair: 'Hindi ➔ English', count: 498100 },
+    { pair: 'English ➔ Marathi', count: 320100 },
+    { pair: 'Hindi ➔ Marathi', count: 280900 },
+    { pair: 'Marathi ➔ Hindi', count: 245000 },
+    { pair: 'English ➔ Hindi', count: 218430 }
   ],
   requestsByDomain: {
     general: 512000,

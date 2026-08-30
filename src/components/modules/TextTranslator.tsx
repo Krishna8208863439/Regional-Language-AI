@@ -190,12 +190,12 @@ export const TextTranslator: React.FC<TextTranslatorProps> = ({ currentLanguage 
             value={sourceText}
             onChange={(e) => setSourceText(e.target.value)}
             placeholder="Type or paste regional text to translate..."
-            className="w-full bg-transparent text-slate-100 text-sm leading-relaxed border-0 focus:ring-0 focus:outline-none resize-none font-indic h-36"
+            className="w-full bg-transparent text-slate-900 dark:text-slate-100 text-sm font-medium leading-relaxed border-0 focus:ring-0 focus:outline-none resize-none font-indic h-36 placeholder:text-slate-400"
           />
 
-          <div className="flex justify-between items-center text-[11px] text-slate-500 pt-2 border-t border-slate-800/60">
+          <div className="flex justify-between items-center text-[11px] text-slate-600 dark:text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
             <span>{sourceText.length} characters</span>
-            <span className="flex items-center gap-1 text-slate-400">
+            <span className="flex items-center gap-1 text-slate-600 dark:text-slate-400 font-medium">
               <Keyboard className="w-3.5 h-3.5 text-slate-500" /> Transliteration Enabled
             </span>
           </div>
@@ -205,9 +205,9 @@ export const TextTranslator: React.FC<TextTranslatorProps> = ({ currentLanguage 
         <div className="glass-card p-5 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-3 min-h-[220px]">
           <div className="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800/80 pb-2">
             <div className="flex items-center space-x-2">
-              <span className="font-semibold text-saffron-400">Translated Output ({targetLang.toUpperCase()})</span>
+              <span className="font-bold text-saffron-600 dark:text-saffron-400">Translated Output ({targetLang.toUpperCase()})</span>
               {translationResult && (
-                <span className="px-1.5 py-0.2 bg-emerald-500/20 text-emerald-400 rounded text-[10px] font-mono">
+                <span className="px-1.5 py-0.2 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded text-[10px] font-mono font-bold">
                   Engine: {translationResult.engineUsed}
                 </span>
               )}
@@ -218,17 +218,17 @@ export const TextTranslator: React.FC<TextTranslatorProps> = ({ currentLanguage 
                 <>
                   <button
                     onClick={() => handleSpeak(translationResult.translatedText, targetLang)}
-                    className="hover:text-saffron-400 transition text-slate-400"
+                    className="hover:text-saffron-500 transition text-slate-600 dark:text-slate-400"
                     title="Listen Translated Voice"
                   >
                     <Volume2 className="w-4 h-4" />
                   </button>
                   <button
                     onClick={handleCopy}
-                    className="hover:text-saffron-400 transition text-slate-400"
+                    className="hover:text-saffron-500 transition text-slate-600 dark:text-slate-400"
                     title="Copy Translation"
                   >
-                    {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                    {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
                   </button>
                 </>
               )}
@@ -238,18 +238,18 @@ export const TextTranslator: React.FC<TextTranslatorProps> = ({ currentLanguage 
           <div className="h-36 overflow-y-auto custom-scrollbar">
             {translationResult ? (
               <div className="space-y-3">
-                <p className="text-sm leading-relaxed text-indigo-100 font-indic font-medium">
+                <p className="text-sm leading-relaxed text-slate-900 dark:text-indigo-100 font-indic font-bold">
                   {translationResult.translatedText}
                 </p>
 
                 {translationResult.transliteration && (
-                  <p className="text-xs italic text-slate-400 bg-slate-900/60 p-2.5 rounded-lg border border-slate-800/80">
+                  <p className="text-xs italic text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-900/60 p-2.5 rounded-lg border border-slate-200 dark:border-slate-800/80">
                     Transliteration: {translationResult.transliteration}
                   </p>
                 )}
               </div>
             ) : (
-              <div className="h-full flex items-center justify-center text-xs text-slate-500 italic">
+              <div className="h-full flex items-center justify-center text-xs text-slate-600 dark:text-slate-400 italic">
                 Click "Translate Instantly" to compute Neural Machine Translation output.
               </div>
             )}

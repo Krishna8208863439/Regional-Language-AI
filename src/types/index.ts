@@ -1,7 +1,16 @@
-export type LanguageCode =
-  | 'hi' | 'mr' | 'gu' | 'bn' | 'pa' | 'kn' | 'ta' | 'te' | 'ml'
-  | 'or' | 'as' | 'ur' | 'sa' | 'kok' | 'ne' | 'mni' | 'brx' | 'sat'
-  | 'ks' | 'doi' | 'mai' | 'sd' | 'en';
+export type LanguageCode = 'hi' | 'mr' | 'en';
+
+export interface UserAccount {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  role: UserRole;
+  preferredLanguage: LanguageCode;
+  avatar?: string;
+  createdAt: string;
+  isLoggedIn: boolean;
+}
 
 export interface LanguageInfo {
   code: LanguageCode;
@@ -111,11 +120,29 @@ export interface NLPAnalysis {
 
 export interface HealthcareSymptomCard {
   id: string;
+  patientName?: string;
+  patientAge?: string;
+  patientGender?: string;
   chiefComplaint: string;
   symptoms: string[];
+  duration?: string;
   translatedMedicalSummary: Record<string, string>;
   urgencyLevel: 'Normal' | 'Urgent' | 'Emergency';
+  riskLevel: 'High' | 'Moderate' | 'Low';
+  riskScore: number;
+  confidenceScore: number;
+  suggestedAction: string;
+  responsePriority: string;
+  vitalSigns?: {
+    bp: string;
+    heartRate: string;
+    spo2: string;
+    temp: string;
+  };
   triageNotes: string;
+  consentId: string;
+  consentTimestamp: string;
+  emergencyAlertTriggered?: boolean;
 }
 
 export interface AgricultureAdvisory {
